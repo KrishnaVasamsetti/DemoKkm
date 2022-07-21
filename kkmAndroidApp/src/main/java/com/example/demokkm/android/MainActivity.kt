@@ -38,9 +38,9 @@ class MainActivity : AppCompatActivity() {
 
         mainScope.launch {
             kotlin.runCatching {
-                userDetails.fetchStudentList()
+                userDetails.fetchStudentListAsModel()
             }.onSuccess {
-                tv.text = it
+                tv.text = it.toString()
             }.onFailure {
                 tv.text = it.message
             }

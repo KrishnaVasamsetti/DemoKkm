@@ -5,7 +5,7 @@ plugins {
 
 kotlin {
     android()
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -19,16 +19,29 @@ kotlin {
     sourceSets {
         val ktorVersion = "2.0.3"
 
-        val commonMain by getting  {
+        val commonMain by getting {
             dependencies {
                 implementation(kotlin("test"))
+
+                //Network call
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
+
+                //Logging
+                implementation("io.ktor:ktor-client-logging:$ktorVersion")
+
+                //Json Parsing
+                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+
             }
         }
 //        val commonTest by getting
         val androidMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
+
+                //Network call
+                implementation("io.ktor:ktor-client-android:$ktorVersion")
             }
         }
 //        val androidTest by getting
@@ -41,6 +54,7 @@ kotlin {
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
             dependencies {
+                //Network call
                 implementation("io.ktor:ktor-client-darwin:$ktorVersion")
             }
         }
