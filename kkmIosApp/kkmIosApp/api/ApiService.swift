@@ -12,7 +12,7 @@ import Foundation
 class ApiService: ObservableObject {
     
     //let studentListUrl = "https://jsonkeeper.com/b/LOAL"
-    let studentListUrl = "https://jsonkeeper.com/b/CPJ4999999"
+    let studentListUrl = "https://jsonkeeper.com/b/CPJ4"
     
     @Published var studentList = [Student]()
     

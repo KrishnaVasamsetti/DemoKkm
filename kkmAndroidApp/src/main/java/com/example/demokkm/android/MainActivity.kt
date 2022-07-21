@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.demokkm.Greeting
 import com.example.demokkm.UserDetails
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 
 
 fun greet(): String {
@@ -18,6 +20,10 @@ fun getAppName() = Greeting().getMyAppName()
 
 
 class MainActivity : AppCompatActivity() {
+
+    private val mainScope = MainScope()
+    private val userDetails = UserDetails()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,7 +33,18 @@ class MainActivity : AppCompatActivity() {
         val isValid1 = UserDetails().isValidDetails("Test", "Pass")
         val isValid2 = UserDetails().isValidDetails("", "")
 
-        tv.text = getAppName()+isValid1+isValid2+isAutomaticDateTime()
+        tv.text = "Loading..."
+//        tv.text = getAppName()+isValid1+isValid2+isAutomaticDateTime()
+
+        mainScope.launch {
+            kotlin.runCatching {
+                userDetails.fetchStudentList()
+            }.onSuccess {
+                tv.text = it
+            }.onFailure {
+                tv.text = it.message
+            }
+        }
 
     }
 

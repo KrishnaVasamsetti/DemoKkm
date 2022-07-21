@@ -9,6 +9,15 @@ struct ContentView: View {
     @State var showAlert: Bool = false
     @State var userNameText: String = ""
     @State var passwordText: String = ""
+    
+    func load() {
+        userDetails.fetchStudentList { 
+            res, error in
+            if let result = res {
+                self.userNameText = result
+            }
+        }
+    }
         
     var body: some View {
         
@@ -42,6 +51,8 @@ struct ContentView: View {
             loginButton
             signUpButton
             
+//            userDetails.
+            
         }
         
         NavigationView() {
@@ -50,6 +61,9 @@ struct ContentView: View {
                 uiStack //content
             }
             .padding()
+            .onAppear() {
+                load()
+            }
             
         }
     }

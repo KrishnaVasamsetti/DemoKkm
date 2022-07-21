@@ -15,6 +15,20 @@ struct StudentListScreen: View {
     @State var hasError = false
     @State var errorMessage = ""
     
+    func loadStudentDetails() {
+        isInProgress = true
+        ApiService().getStudentList(completion: {
+            students in
+                print("My Students")
+                self.students = students
+                isInProgress = false
+        }, errorEvent: { error in
+            errorMessage = error
+            isInProgress = false
+            hasError = true
+        })
+    }
+    
     var body: some View {
 //        NavigationView {
         VStack{
@@ -38,17 +52,7 @@ struct StudentListScreen: View {
         }
         .alert(isPresented: $hasError, title: errorMessage)
         .onAppear() {
-            isInProgress = true
-            ApiService().getStudentList(completion: {
-                students in
-                    print("My Students")
-                    self.students = students
-                    isInProgress = false
-            }, errorEvent: { error in
-                errorMessage = error
-                isInProgress = false
-                hasError = true
-            })
+            loadStudentDetails()
         }
         .navigationTitle("Students")
         .navigationBarTitleDisplayMode(.inline)
