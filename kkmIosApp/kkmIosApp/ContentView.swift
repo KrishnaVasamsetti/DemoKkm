@@ -11,10 +11,10 @@ struct ContentView: View {
     @State var passwordText: String = ""
     
     func load() {
-        userDetails.fetchStudentList { 
+        userDetails.fetchStudentListAsModel {
             res, error in
             if let result = res {
-                self.userNameText = result
+                self.userNameText = "\(result)"
             }
         }
     }
@@ -50,9 +50,7 @@ struct ContentView: View {
             
             loginButton
             signUpButton
-            
-//            userDetails.
-            
+
         }
         
         NavigationView() {

@@ -26,6 +26,11 @@ class UserDetails {
         return response.bodyAsText()
     }
 
+    suspend fun fetchStudentListAsModels(): Array<StudentListResponse> {
+        val response = client.get(STUDENT_LIST_API)
+        return response.body()
+    }
+
     suspend fun fetchStudentListAsModel(): StudentListResponse {
 
         val myClient = Platform().httpClient{}

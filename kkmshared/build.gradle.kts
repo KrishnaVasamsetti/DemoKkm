@@ -1,6 +1,7 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    kotlin("plugin.serialization") version "1.4.31"
 }
 
 kotlin {
@@ -25,7 +26,6 @@ kotlin {
 
                 //Network call
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
-                implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
 
                 //Logging
                 implementation("io.ktor:ktor-client-logging:$ktorVersion")
@@ -40,7 +40,10 @@ kotlin {
         val androidMain by getting {
             dependencies {
 
+                implementation("androidx.annotation:annotation:1.4.0")
+
                 //Network call
+                implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
                 implementation("io.ktor:ktor-client-android:$ktorVersion")
             }
         }
