@@ -38,11 +38,13 @@ class MainActivity : AppCompatActivity() {
 
         mainScope.launch {
             kotlin.runCatching {
-                userDetails.fetchStudentListAsModel()
+                userDetails.fetchBaseResponseModel()
             }.onSuccess {
                 tv.text = it.toString()
+                Log.d("TAG", "onCreate: $it")
             }.onFailure {
                 tv.text = it.message
+                Log.d("TAG", "onCreate: ${it.message}")
             }
         }
 

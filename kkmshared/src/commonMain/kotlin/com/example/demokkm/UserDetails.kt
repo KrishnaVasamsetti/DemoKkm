@@ -1,5 +1,6 @@
 package com.example.demokkm
 
+import com.example.demokkm.model.BaseResponseTestModel
 import com.example.demokkm.model.StudentListResponse
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -12,6 +13,8 @@ class UserDetails {
     companion object {
         const val STUDENT_DETAILS_API = "https://jsonkeeper.com/b/RJWD"
         const val STUDENT_LIST_API = "https://jsonkeeper.com/b/LOAL"
+        const val BASE_RESPONSE_TEST_API = "https://jsonkeeper.com/b/E2GG"
+        const val BASE_RESPONSE_TEST_API_2 = "https://jsonkeeper.com/b/93HN"
     }
 
     private val client = HttpClient()
@@ -42,6 +45,14 @@ class UserDetails {
 
     suspend fun fetchStudentList2(): String {
         return "Response for sample call"
+    }
+
+    suspend fun fetchBaseResponseModel(): BaseResponseTestModel {
+        val myClient = Platform().httpClient{}
+        val response = myClient.get(BASE_RESPONSE_TEST_API) {
+
+        }
+        return response.body()
     }
 
 }

@@ -6,6 +6,7 @@ import io.ktor.client.engine.okhttp.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.plugins.logging.*
 import io.ktor.serialization.kotlinx.json.*
+import kotlinx.serialization.json.Json
 import java.util.concurrent.TimeUnit
 
 actual class Platform actual constructor() {
@@ -17,7 +18,11 @@ actual class Platform actual constructor() {
         config(this)
 
         install(ContentNegotiation) {
-            json()
+            json(
+                Json {
+                    ignoreUnknownKeys = true
+                }
+            )
         }
 
         install(Logging) {

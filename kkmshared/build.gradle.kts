@@ -2,6 +2,8 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     kotlin("plugin.serialization") version "1.4.31"
+    id("com.squareup.sqldelight")
+
 }
 
 kotlin {
@@ -19,6 +21,7 @@ kotlin {
 
     sourceSets {
         val ktorVersion = "2.0.3"
+        val sqlDelightVersion = "1.5.3"
 
         val commonMain by getting {
             dependencies {
@@ -34,6 +37,9 @@ kotlin {
                 implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
 
+                //SQLDelight
+                implementation("com.squareup.sqldelight:runtime:$sqlDelightVersion")
+
             }
         }
 //        val commonTest by getting
@@ -45,6 +51,10 @@ kotlin {
                 //Network call
                 implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
                 implementation("io.ktor:ktor-client-android:$ktorVersion")
+
+                //SQLDelight
+                implementation ("com.squareup.sqldelight:runtime-jvm:$sqlDelightVersion")
+                implementation("com.squareup.sqldelight:android-driver:$sqlDelightVersion")
             }
         }
 //        val androidTest by getting
@@ -59,6 +69,9 @@ kotlin {
             dependencies {
                 //Network call
                 implementation("io.ktor:ktor-client-darwin:$ktorVersion")
+
+                //SQLDelight
+                implementation("com.squareup.sqldelight:native-driver:$sqlDelightVersion")
             }
         }
 //        val iosX64Test by getting
@@ -80,4 +93,14 @@ android {
         minSdk = 23
         targetSdk = 32
     }
+}
+
+sqldelight {
+    //Name of your database, might be anything you want
+//    MyDatabase {
+//        //The package where all entities will be generated in
+//        //More options https://github.com/square/sqldelight
+//        packageName = 'com.example.demokkm.database'
+//
+//    }
 }

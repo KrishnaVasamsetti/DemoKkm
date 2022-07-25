@@ -11,7 +11,7 @@ struct ContentView: View {
     @State var passwordText: String = ""
     
     func load() {
-        userDetails.fetchStudentListAsModel {
+        userDetails.fetchBaseResponseModel {
             res, error in
             if let result = res {
                 self.userNameText = "\(result)"
