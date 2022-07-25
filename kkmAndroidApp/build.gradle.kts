@@ -17,6 +17,9 @@ android {
             isMinifyEnabled = false
         }
     }
+    packagingOptions {
+        exclude ("META-INF/*.kotlin_module")
+    }
 }
 
 dependencies {

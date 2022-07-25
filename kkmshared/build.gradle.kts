@@ -97,10 +97,7 @@ android {
 
 sqldelight {
     //Name of your database, might be anything you want
-//    MyDatabase {
-//        //The package where all entities will be generated in
-//        //More options https://github.com/square/sqldelight
-//        packageName = 'com.example.demokkm.database'
-//
-//    }
+    database("AppDatabase") {
+        packageName = "com.example.demokkm.database"
+    }
 }

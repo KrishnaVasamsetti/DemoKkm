@@ -1,0 +1,12 @@
+
+CREATE TABLE StudentListResponse (
+name TEXT,
+college_name TEXT
+);
+
+insertItem:
+INSERT OR FAIL INTO StudentListResponse(name, college_name) VALUES (?, ?);
+
+selectAll:
+SELECT *
+FROM StudentListResponse;
