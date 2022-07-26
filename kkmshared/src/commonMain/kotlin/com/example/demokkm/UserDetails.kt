@@ -18,6 +18,7 @@ class UserDetails {
     }
 
     private val client = HttpClient()
+    private val appHttpClient = AppHttpClient()
 
     fun isValidDetails(userName: String, password: String): Boolean {
         return userName.isNotEmpty() && password.isNotEmpty()
@@ -36,7 +37,7 @@ class UserDetails {
 
     suspend fun fetchStudentListAsModel(): StudentDetails {
 
-        val myClient = Platform().httpClient{}
+        val myClient = appHttpClient.httpClient{}
         val response = myClient.get(STUDENT_DETAILS_API) {
 
         }
@@ -48,7 +49,7 @@ class UserDetails {
     }
 
     suspend fun fetchBaseResponseModel(): BaseResponseTestModel {
-        val myClient = Platform().httpClient{}
+        val myClient = appHttpClient.httpClient{}
         val response = myClient.get(BASE_RESPONSE_TEST_API) {
 
         }

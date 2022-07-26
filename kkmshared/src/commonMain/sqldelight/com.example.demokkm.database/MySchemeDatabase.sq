@@ -17,6 +17,12 @@ selectAll:
 SELECT *
 FROM StudentListResponse;
 
+deleteAll:
+DELETE FROM StudentListResponse;
+
+deleteItem:
+DELETE FROM StudentListResponse(id) WHERE id = ?;
+
 -- var id: Int? = null,
 --     var name: String? = null,
 --     var age: Int? = null,
