@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.demokkm.Greeting
 import com.example.demokkm.UserDetails
+import com.example.demokkm.database.DatabaseDriverFactory
+import com.example.demokkm.database.KDatabase
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
@@ -24,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private val mainScope = MainScope()
     private val userDetails = UserDetails()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,11 +39,15 @@ class MainActivity : AppCompatActivity() {
         tv.text = "Loading..."
 //        tv.text = getAppName()+isValid1+isValid2+isAutomaticDateTime()
 
+        val appDb = KDatabase(DatabaseDriverFactory(applicationContext))
+
         mainScope.launch {
             kotlin.runCatching {
-                userDetails.fetchBaseResponseModel()
+                val model = userDetails.fetchStudentListAsModel()
+                appDb.insertStudentItem(model)
             }.onSuccess {
-                tv.text = it.toString()
+                val list = appDb.getAllStudentList()
+                tv.text = "Success: $list"
                 Log.d("TAG", "onCreate: $it")
             }.onFailure {
                 tv.text = it.message

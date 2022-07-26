@@ -18,6 +18,14 @@ struct ContentView: View {
             }
         }
     }
+    
+    func loadFromDb() {
+        let details = StudentDetails(id: 4, name: "Krishna", age: 24, college_name: "DLR college")
+        let appDb = KDatabase(databaseDriverFactory: DatabaseDriverFactory())
+        appDb.insertStudentItem(model: details)
+                let list = appDb.getAllStudentList()
+        self.userNameText = "\(list)"
+    }
         
     var body: some View {
         
@@ -60,7 +68,8 @@ struct ContentView: View {
             }
             .padding()
             .onAppear() {
-                load()
+                //load()
+                loadFromDb()
             }
             
         }

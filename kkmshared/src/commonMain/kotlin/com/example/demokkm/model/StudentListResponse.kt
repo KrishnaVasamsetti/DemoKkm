@@ -3,7 +3,7 @@ package com.example.demokkm.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class StudentListResponse(
+data class StudentDetails(
     var id: Int? = null,
     var name: String? = null,
     var age: Int? = null,

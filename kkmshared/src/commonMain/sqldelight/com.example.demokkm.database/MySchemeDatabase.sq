@@ -1,12 +1,23 @@
 
+
 CREATE TABLE StudentListResponse (
+id INTEGER,
 name TEXT,
+age INTEGER,
 college_name TEXT
 );
 
 insertItem:
-INSERT OR FAIL INTO StudentListResponse(name, college_name) VALUES (?, ?);
+INSERT OR IGNORE INTO StudentListResponse(id, name, age, college_name) VALUES (?, ?, ?, ?);
+
+insertOrReplaceItem:
+INSERT OR REPLACE INTO StudentListResponse(id, name, age, college_name) VALUES (?, ?, ?, ?);
 
 selectAll:
 SELECT *
 FROM StudentListResponse;
+
+-- var id: Int? = null,
+--     var name: String? = null,
+--     var age: Int? = null,
+--     var college_name: String? = null

@@ -1,7 +1,7 @@
 package com.example.demokkm
 
 import com.example.demokkm.model.BaseResponseTestModel
-import com.example.demokkm.model.StudentListResponse
+import com.example.demokkm.model.StudentDetails
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
@@ -29,12 +29,12 @@ class UserDetails {
         return response.bodyAsText()
     }
 
-    suspend fun fetchStudentListAsModels(): Array<StudentListResponse> {
+    suspend fun fetchStudentListAsModels(): Array<StudentDetails> {
         val response = client.get(STUDENT_LIST_API)
         return response.body()
     }
 
-    suspend fun fetchStudentListAsModel(): StudentListResponse {
+    suspend fun fetchStudentListAsModel(): StudentDetails {
 
         val myClient = Platform().httpClient{}
         val response = myClient.get(STUDENT_DETAILS_API) {
