@@ -4,6 +4,9 @@ import kkmshared
 struct ContentView: View {
     let greet = Greeting().greeting()
     let appName = Greeting().getMyAppName()
+    
+    let localTime = Greeting().getCurrentDataTime()
+    
     let userDetails = UserDetails()
     @State var isSignUpActivate: Bool = false
     @State var showAlert: Bool = false
@@ -14,7 +17,7 @@ struct ContentView: View {
         userDetails.fetchBaseResponseModel {
             res, error in
             if let result = res {
-                self.userNameText = "\(result)"
+                self.userNameText = "\(localTime) \(result)"
             }
         }
     }
@@ -24,7 +27,7 @@ struct ContentView: View {
         let appDb = KDatabase(databaseDriverFactory: DatabaseDriverFactory())
         appDb.insertStudentItem(model: details)
                 let list = appDb.getAllStudentList()
-        self.userNameText = "\(list)"
+        self.userNameText = "\(localTime) \(list)"
     }
         
     var body: some View {

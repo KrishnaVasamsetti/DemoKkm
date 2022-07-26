@@ -19,6 +19,7 @@ fun greet(): String {
     return Greeting().greeting()
 }
 fun getAppName() = Greeting().getMyAppName()
+fun getLocalDateTime() = Greeting().getCurrentDataTime()
 
 
 class MainActivity : AppCompatActivity() {
@@ -47,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                 appDb.insertStudentItem(model)
             }.onSuccess {
                 val list = appDb.getAllStudentList()
-                tv.text = "Success: $list"
+                tv.text = "Success: $list Time: ${getLocalDateTime()}"
                 Log.d("TAG", "onCreate: $it")
             }.onFailure {
                 tv.text = it.message

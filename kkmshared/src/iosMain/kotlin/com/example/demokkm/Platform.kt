@@ -5,6 +5,7 @@ import io.ktor.client.engine.darwin.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.plugins.logging.*
 import io.ktor.serialization.kotlinx.json.*
+import kotlinx.serialization.json.Json
 import platform.UIKit.UIDevice
 
 actual class Platform actual constructor() {
@@ -16,7 +17,11 @@ actual class Platform actual constructor() {
         config(this)
 
         install(ContentNegotiation) {
-            json()
+            json(
+                Json {
+                    ignoreUnknownKeys = true
+                }
+            )
         }
 
         install(Logging) {
