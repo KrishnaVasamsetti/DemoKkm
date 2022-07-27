@@ -6,6 +6,8 @@ struct ContentView: View {
     let appName = Greeting().getMyAppName()
     
     let localTime = Greeting().getCurrentDataTime()
+    let userNameKey = "USER_KEY"
+    let passwordKey = "PASSWORD_KEY"
     
     let userDetails = UserDetails()
     @State var isSignUpActivate: Bool = false
@@ -14,10 +16,22 @@ struct ContentView: View {
     @State var passwordText: String = ""
     
     func load() {
+        let pref = KMMPreference(context:UserDefaults.standard)
+
         userDetails.fetchBaseResponseModel {
             res, error in
             if let result = res {
-                self.userNameText = "\(localTime) \(result)"
+                //self.userNameText = "\(localTime) \(result)"
+                let userLocal = pref.getString(key: userNameKey)
+//                if let u = userLocal {
+                    self.userNameText = userLocal!
+//                }
+                let passwordLocal = pref.getString(key: passwordKey)
+                if let pwd = passwordLocal {
+                    self.passwordText = pwd
+                    print("pass \(pwd)")
+                }
+                
             }
         }
     }
@@ -44,9 +58,16 @@ struct ContentView: View {
             .keyboardType(.default)
             
         let loginButton = Button("Login") {
+            let pref = KMMPreference(context:UserDefaults.standard)
+
             let isValidFiedls = userDetails.isValidDetails(userName: userNameText, password: passwordText)
                isSignUpActivate = isValidFiedls
                showAlert = !isValidFiedls
+            if(isValidFiedls) {
+                pref.putString(key: userNameKey, value: userNameText)
+                pref.putString(key: passwordKey, value: passwordText)
+                print("Updated here")
+            }
         }
             .padding()
             .alert(isPresented: $showAlert, title: "Alert", message: "Invalid fields")
@@ -76,8 +97,8 @@ struct ContentView: View {
             }
             .padding()
             .onAppear() {
-                //load()
-                loadFromDb()
+                load()
+//                loadFromDb()
             }
             
         }

@@ -20,8 +20,8 @@ FROM StudentListResponse;
 deleteAll:
 DELETE FROM StudentListResponse;
 
-deleteItem:
-DELETE FROM StudentListResponse(id) WHERE id = ?;
+-- deleteItem:
+-- DELETE FROM StudentListResponse(id) WHERE id = ?;
 
 -- var id: Int? = null,
 --     var name: String? = null,

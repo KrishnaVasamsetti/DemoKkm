@@ -11,6 +11,7 @@ import com.example.demokkm.Greeting
 import com.example.demokkm.UserDetails
 import com.example.demokkm.database.DatabaseDriverFactory
 import com.example.demokkm.database.KDatabase
+import com.example.demokkm.preferences.KMMPreference
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
@@ -41,14 +42,17 @@ class MainActivity : AppCompatActivity() {
 //        tv.text = getAppName()+isValid1+isValid2+isAutomaticDateTime()
 
         val appDb = KDatabase(DatabaseDriverFactory(applicationContext))
+        val pref = KMMPreference(application)
+        pref.putInt("Visits", pref.getInt("Visits", 0)+1)
 
         mainScope.launch {
             kotlin.runCatching {
                 val model = userDetails.fetchStudentListAsModel()
                 appDb.insertStudentItem(model)
             }.onSuccess {
+                val visits = pref.getInt("Visits", 0)
                 val list = appDb.getAllStudentList()
-                tv.text = "Success: $list Time: ${getLocalDateTime()}"
+                tv.text = "visits: $visits Success: $list Time: ${getLocalDateTime()}"
                 Log.d("TAG", "onCreate: $it")
             }.onFailure {
                 tv.text = it.message
