@@ -79,7 +79,7 @@ struct ContentView: View {
         let uiStack = VStack(alignment: .center) {
             
             userNameTextField
-            passwordTextField
+            passwordTextField3
 
             NavigationLink(destination: StudentListScreen(), isActive: $isSignUpActivate) {
                 EmptyView()
