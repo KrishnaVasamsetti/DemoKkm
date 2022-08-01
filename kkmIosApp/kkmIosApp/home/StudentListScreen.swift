@@ -14,6 +14,7 @@ struct StudentListScreen: View {
     @State var isInProgress = false
     @State var hasError = false
     @State var errorMessage = ""
+    @State var isItemClicked = false
     
     func loadStudentDetails() {
         isInProgress = true
@@ -32,6 +33,9 @@ struct StudentListScreen: View {
     var body: some View {
 //        NavigationView {
         VStack{
+            NavigationLink(destination: MapScreen(), isActive: $isItemClicked) {
+                EmptyView()
+            }
             if(isInProgress) {
                 ProgressView("Loading")
                 //.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
@@ -44,6 +48,8 @@ struct StudentListScreen: View {
                         Text("College: ")+Text("\(student.college_name)").bold()
                     }
                     
+                }.onTapGesture {
+                    isItemClicked = true
                 }
             }
             

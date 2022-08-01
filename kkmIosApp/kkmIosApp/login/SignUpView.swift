@@ -15,6 +15,7 @@ struct SignUpView: View {
     @State var emailText: String = ""
     @State var phoneNumberText: String = ""
     @State var isCheckedTerms: Bool = false
+    @State var selectedColor: Color = Color.yellow
     
     
     var body: some View {
@@ -64,6 +65,9 @@ struct SignUpView: View {
             TextField("Email", text:$emailText).font(.headline)
             TextField("Phone", text:$phoneNumberText).font(.body)
         
+            
+            ColorPicker("Select Color", selection: $selectedColor).labelsHidden()
+            
             terms
             
         }

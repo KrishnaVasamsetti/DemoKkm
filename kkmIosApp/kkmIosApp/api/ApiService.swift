@@ -26,14 +26,17 @@ class ApiService: ObservableObject {
         URLSession.shared.dataTask(with: url) { data, response, error in
             
             if let err = error {
-              print("Error accessing swapi.co: /(error)")
+              print("Error accessing swapi.co: \(err)")
               return
             }
             
             guard let httpResponse = response as? HTTPURLResponse,
                         (200...299).contains(httpResponse.statusCode) else {
-                let httpRes = response.self as? HTTPURLResponse
-                errorEvent("Status code: \(httpRes?.statusCode) Message: \(String(describing: httpRes?.url!))")
+                guard let httpRes = response.self as? HTTPURLResponse else {
+                    print("HttpURLResponse has no value")
+                    return
+                }
+                errorEvent("Status code: \(httpRes.statusCode) Message: \(String(describing: httpRes.url!))")
                 print("Error with the response, unexpected status code: \(String(describing: response))")
                 return
               }
