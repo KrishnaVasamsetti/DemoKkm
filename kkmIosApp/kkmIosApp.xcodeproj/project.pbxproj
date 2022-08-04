@@ -406,7 +406,7 @@
 					"-framework",
 					kkmshared,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.kkmIosApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.narayana.kmm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
