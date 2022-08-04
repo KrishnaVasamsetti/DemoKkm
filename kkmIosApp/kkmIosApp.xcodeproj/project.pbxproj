@@ -393,7 +393,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"kkmIosApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 3F8J2C6RF6;
+				DEVELOPMENT_TEAM = X6N5QZ5VG9;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../kkmshared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				INFOPLIST_FILE = kkmIosApp/Info.plist;
